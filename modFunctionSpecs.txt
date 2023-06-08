@@ -1,0 +1,6 @@
+process mod(x,y: int) r,q: int
+pre y!=0
+post (y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0) or 
+     (y<0 and x!=0 and x=q*y+r and |r|<-y and y*r>=0) or
+     (x=0 and q=0 and r=0)
+end_process
