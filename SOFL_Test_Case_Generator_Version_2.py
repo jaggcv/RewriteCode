@@ -404,7 +404,7 @@ def generateCases(testConditions,defConditions,input_Variables,output_Variables,
         else:
             #print("Error al generar caso de prueba para el predicado: ", defConditions[i])
             #print("Con los datos: ", input_test_data)
-            return "Error"
+            return "Error 1"
     else:
     #Generate a test case per test condition
         for i,testCond in enumerate(testConditions):
@@ -413,7 +413,7 @@ def generateCases(testConditions,defConditions,input_Variables,output_Variables,
             predicate, nonNumericVariables, dataForNNVariables = enhacePredicate(testConditions[i],input_Variables)
             #If there's a contradiction as (x=2 and x<0) then return Error
             if predicate == 'error':
-                return "Error"
+                return "Error 2"
             #If predicate's lenght is greater than 0 it means PSO algorithm can find values for the remaining variables
             if len(predicate)>0:
                 #Initialize parameters for PSO algorithm (list of variables, types of variables, bounds, number of variables)
@@ -529,10 +529,10 @@ def generateCases(testConditions,defConditions,input_Variables,output_Variables,
                 else:
                     #print("Error al generar caso de prueba para el predicado: ", defConditions[i])
                     #print("Con los datos: ", input_test_data)
-                    return "Error"
+                    return "Error 3"
             else:
                 #print("Error al generar caso de prueba para el predicado: ", testConditions[i])
-                return "Error"
+                return "Error 4"
     return test_cases
 
 #This function generates all forms of a predicate (i.e. having x>=0, extract x>0, x=0)
@@ -623,7 +623,7 @@ def getPredicateFamily(guardConditions, input_Variables, defConditions, output_V
         for element in family[guard]:
             if pre == "True":
                 tc = generateCases([element],[defConditions[k]], input_Variables, output_Variables, False, False, [])
-                if tc != "Error":
+                if tc != "Error 5":
                     tests.append(tc.copy())
                     dicTests[element] = tc.copy()
             else:
@@ -804,6 +804,8 @@ def testRawSpecs(testConditions, defConditions, input_Variables, output_Variable
     testsRS = []
     for i,testCond in enumerate(testConditions):
         tc = generateCases([testCond],[defConditions[i]], input_Variables, output_Variables, False, False, [])
+        print("this is...")
+        print(tc)
         testsRS.append(tc.copy())
     return testsRS
 

@@ -70,12 +70,52 @@ _dividir funcion de guarda y definicion de la post_
 [73] post <-
     ' (y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0) or(y<0 and x!=0 andx=q*y+r and|r|<-y and y*r>=0) or(x=0 and q=0 and r=0)'
 
+_dentro del if_
+
+las clausulas se crean aplicando un split a la cadena ' or'
+
 [75] clauses <-
     [' (y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0) ','(y<0 and x!=0 andx=q*y+r and|r|<-y and y*r>=0) ','(x=0 and q=0 and r=0)']
     
+[77][1] clause <-
+    'y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0) '
+
+[79][1] clause <-
+    'y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0)'
+
+[81][1] clause <-
+    'y>0 and x!=0 and x=q*y+r and |r|< y and y*r>=0'
 
 
-    
+Specification pre modification
+
+Con el siguiente documento txt de las especificaciones funcionó
+
+```python
+process mod(x,y:int)
+r,q: int
+pre y!=0
+post (y>0 and x!=0 implies x=q*y+r and |r|< y and y*r>=0) or 
+(y<0 and x!=0 implies x=q*y+r and |r|<=|y| and y*r>=0) or
+(x=0 implies q=0 and r=0)
+end_process
+```
+para el codigo siguiente de MOD
+
+```python
+def mod(x,y):
+    q = x//y
+    r = x-q*y
+    return r,q
+```
+
+para ejecutar los mutantes
+
+```
+mut.py --target mod --unit-test test_mod -m
+```
+
+<hr>
 
 
 
